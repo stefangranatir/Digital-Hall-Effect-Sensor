@@ -10,14 +10,21 @@
 |-----      |--------------                          |------------|----------------|
 |  333080   |      Digital Hall Effect Sensor        |[View Store](https://soldered.com/product/hall-effect-sensor-breakout-with-digital-output/)| [View on solde.red](https://solde.red/333080)              |
 
-If you've ever wanted to experiment with magnetic field detection, Hall Effect sensors are a great place to start. Hall Effect sensors are ideal for applications that require simple magnetic field sensing, such as measuring rotational speed, position detection and proximity sensing.
-This Hall Effect sensor enables easy detection of magnetic field presence under the threshold distance. It operates on **3.3V** and requires up to **5mA** of current. The sensor is designed for seamless integration with microcontrollers and can be controlled directly through an arduino library
+If you've ever wanted to experiment with magnetic field detection, Hall Effect sensors are a great place to start. 
+This Hall effect sensor enables easy detection of magnetic field presence under the threshold distance. It operates on **2.25V - 5V** range. The sensor: **SI7201-B-06** is designed for seamless integration with microcontrollers and can be controlled directly through an Arduino library
 
 ## 2. How it works
 ---
 A Hall effect sensor consists of a thin rectangular semiconductive material (indium arsenide, gallium arsenide) through which flows a continuous current. When the sensor is exposed to a magnetic field perpendicular to the current, the magnetic (Lorentz) force deflect the charge carriers within the semiconductor. This deflection causes a difference in potentials, known as Hall Voltage, proportional to the strength of the magnetic field. The Hall Voltage generated is typically very small (in microvolts), so it is amplified by an internal high gain amplifier.
 
-There are two types of Hall Effect sensors, the difference being in type of output value. **Analog** sensors provide a continuous output voltage proportional to the intensity of the magnetic field. They are used in applications where precise measuring is required. **Digital** sensors include a Schmitt Trigger circuit that compares the amplified Hall Voltage to preset thresholds. The outupt switches between ON and OFF states when magnetic field crosses these thresholds, it's ideal for applications such as proximity detection or position sensing.
+There are two types of Hall Effect sensors, the difference being in type of output value.   
+**Analog** sensors provide a continuous output voltage proportional to the intensity of the magnetic field. They are used in applications where precise measuring is required.  
+ **Digital** sensors include a Schmitt Trigger circuit that compares the amplified Hall Voltage to preset threshold (For example, for a small fridge magnet, the threshold distance is only a few milimeters). The outupt switches between ON and OFF states when magnetic field crosses these thresholds, it's ideal for applications such as proximity detection or position sensing.
+
+Graphs below show the difference between in the Output voltage - magnetic field relation:
+ | ![Analog Graph](pictures/AnalogGraph.png)|![Digital Graph](pictures/DigitalGraph.png)|
+ | :---:| :---:|
+
 
 ## 3. Arduino: Getting Started
 ---
@@ -149,3 +156,16 @@ void loop()
 }
 
 ```
+### HallEffect_Digital()
+Constructor for the HallEffect_Digital class. It configures the output pin.
+
+Function parameters:   
+|Type|Name|Description|
+|:---:|:---:|:---:|
+|uint8_t| _pin| Digital pin for sensor output|        
+### hall.getReading()
+Reads hall effect sensor value.  
+note: returns inverted sensor value (1 for magnet detected, 0 for no magnet)
+
+Function parameters: None  
+Returns: Bool
